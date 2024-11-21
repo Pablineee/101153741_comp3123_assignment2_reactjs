@@ -4,12 +4,15 @@ const DiviV1Data = require('./models/DiviV1Data');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
+const cors = require('cors');
 
 // Connect to database
 connectDB();
 
 // Middleware to parse JSON
 app.use(express.json());
+
+app.use(cors());
 
 /////////////////////////////// Divi V1 Endpoints ///////////////////////////////
 

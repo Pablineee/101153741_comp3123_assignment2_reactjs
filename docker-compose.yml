@@ -2,21 +2,21 @@ version: '3.8'
 
 services:
 
-  divi-frontend:
-    build:
-      context: ./front_end
-      dockerfile: ./front_end/Dockerfile
-    ports:
-      - "${PORT:-3000}:${PORT:-3000}"
-    env_file:
-      - ./front_end/.env
-    networks:
-      - divi-network
+  # divi-frontend:
+  #   build:
+  #     context: ./front_end
+  #     dockerfile: ./front_end/Dockerfile
+  #   ports:
+  #     - "${PORT:-3000}:${PORT:-3000}"
+  #   env_file:
+  #     - ./front_end/.env
+  #   networks:
+  #     - divi-network
 
   divi-backend:
     build:
       context: ./back_end
-      dockerfile: ./back_end/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "${PORT:-5000}:${PORT:-5000}"
     env_file:
