@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+/back_end/node_modules
+/front_end/node_modules
+/front_end/.pnp
+/front_end/.pnp.js
+
+# Environment variables
+.env
+/back_end/.env
+/front_end/.env
+
+# Build output
+/front_end/build
+
+# testing
+/front_end/coverage
+
+# misc
+/front_end/.DS_Store
+/front_end/.env.local
+/front_end/.env.development.local
+/front_end/.env.test.local
+/front_end/.env.production.local
