@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <main>
         <section>
-          <DiviList />
+          <h1>Here we go...</h1>
         </section>
       </main>
     </div>

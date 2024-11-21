@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL fetched from environment variables
-const API = process.env.REACT_APP_API_BASE_URL;
+const API = process.env.REACT_APP_API_BASE_URL; // To be changed before containerization of front-end
 
 // Create an Axios instance
 const api = axios.create({
