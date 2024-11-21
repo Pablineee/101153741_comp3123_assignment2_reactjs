@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+
+  divi-frontend:
+    build:
+      context: ./front_end
+      dockerfile: ./front_end/Dockerfile
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    env_file:
+      - ./front_end/.env
+    networks:
+      - divi-network
+
+  divi-backend:
+    build:
+      context: ./back_end
+      dockerfile: ./back_end/Dockerfile
+    ports:
+      - "${PORT:-5000}:${PORT:-5000}"
+    env_file:
+      - ./back_end/.env
+    depends_on:
+      - mongo-divi
+    networks:
+      - divi-network
+
+  mongo-divi:
+    image: mongo:latest
+    container_name: mongo-divi
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - divi-network
+
+volumes:
+  mongo-data:
+
+networks:
+  divi-network:
+    driver: bridge
