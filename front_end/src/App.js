@@ -1,17 +1,16 @@
-import logo from './assets/images/logo.svg';
-import './assets/styles/App.css';
-import DiviList from './components/DiviList'; // Import DiviList component
+import Button from './components/Button';
+import Card from './components/Card'
 
 function App() {
+
   return (
-    <div className="App">
-      <main>
-        <section>
-          <h1>Here we go...</h1>
-        </section>
-      </main>
+    
+    <div className='app-container'>
+      <Button />
     </div>
-  );
+    
+  )
+
 }
 
 export default App;
