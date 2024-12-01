@@ -2,43 +2,46 @@ version: '3.8'
 
 services:
 
-  # divi-frontend:
-  #   build:
-  #     context: ./front_end
-  #     dockerfile: ./front_end/Dockerfile
-  #   ports:
-  #     - "${PORT:-3000}:${PORT:-3000}"
-  #   env_file:
-  #     - ./front_end/.env
-  #   networks:
-  #     - divi-network
+  frontend:
+    container_name: frontend
+    build:
+      context: ./front_end
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:80"
+    env_file:
+      - ./front_end/.env
+    networks:
+      - employee-system-network
 
-  divi-backend:
+  backend:
+    container_name: backend
     build:
       context: ./back_end
       dockerfile: Dockerfile
     ports:
-      - "${PORT:-5000}:${PORT:-5000}"
+      - "5000:5000"
     env_file:
       - ./back_end/.env
     depends_on:
-      - mongo-divi
+      - mongo-employee-system
     networks:
-      - divi-network
+      - employee-system-network
 
-  mongo-divi:
+  mongo-employee-system:
     image: mongo:latest
-    container_name: mongo-divi
+    container_name: mongo-employee-system
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
     networks:
-      - divi-network
+      - employee-system-network
 
 volumes:
   mongo-data:
 
 networks:
-  divi-network:
+  employee-system-network:
+    name: employee-system-network
     driver: bridge

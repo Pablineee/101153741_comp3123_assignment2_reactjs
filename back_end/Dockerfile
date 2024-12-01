@@ -1,8 +1,8 @@
-# Use Node.js runtime as a parent image
+# Use Node.js runtime as parent image
 FROM node:18-alpine
 
 # Set working directory inside container
-WORKDIR /app
+WORKDIR /101153741_comp3123_assignment2_reactjs
 
 # Copy package.json and package-lock.json into container
 COPY package*.json ./
