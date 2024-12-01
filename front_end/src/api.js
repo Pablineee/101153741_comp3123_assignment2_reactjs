@@ -1,22 +1,30 @@
 import axios from 'axios';
 
-// Base URL fetched from environment variables
-const API = process.env.REACT_APP_API_BASE_URL; // To be changed before containerization of front-end
+const API = process.env.REACT_APP_API_BASE_URL;
 
 // Create an Axios instance
 const api = axios.create({
     baseURL: API,
-    timeout: 5000, // Timeout (optional)
+    timeout: 5000, // Timeout
 });
 
-// API call to get Divi data
-export const getDivi = () => api.get('/divi');
+// API call to retrieve all employees
+export const getAllEmployees = () => api.get('/emp/employees');
 
-// API call to create a new Divi data entry
-export const createDivi = (data) => api.post('/divi', data);
+// API call to create a new employee
+export const createEmployee = (data) => api.post('/emp/employees', data);
 
-// API call to update an existing Divi data entry
-export const updateDivi =(id, data) => api.put(`/divi/${id}`, data);
+// API call to create a new user
+export const createUser = (data) => api.post('/user/signup', data);
 
-// API call to delete existing Divi data entry
-export const deleteDivi = (id) => api.delete(`/divi/${id}`);
+// API call to login user
+export const loginUser = (data) => api.post('/user/login', data);
+
+// API call to update an existing employee
+export const updateDivi =(id, data) => api.put(`/emp/employees/${id}`, data);
+
+// API call to delete existing employee
+export const deleteDivi = (id) => api.delete(`/emp/employees/${id}`);
+
+// API call to search employees by query
+export const searchEmployees = (query) => api.get('/emp/employees/search', { params: { query } });

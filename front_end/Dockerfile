@@ -19,7 +19,7 @@ RUN npm run build
 # Use Nginx to serve the built files
 FROM nginx:alpine
 
-# Add inline Nginx configuration for React routing
+# Add Nginx configuration for routing
 RUN echo 'server { \
     listen 80; \
     server_name localhost; \
