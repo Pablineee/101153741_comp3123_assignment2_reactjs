@@ -106,15 +106,16 @@ router.get('/api/v1/emp/employees', async (req, res) => {
 });
 
 // Create new employee
-router.post('/api/v1/emp/employees',
+router.post(
+    '/api/v1/emp/employees',
     [
         // Validation rules
-        body('first_name').not().isEmpty().withMessage('Enter a valid first name'),
-        body('last_name').not().isEmpty().withMessage('Enter a valid last name'),
-        body('email').isEmail().withMessage('Enter a valid email.'),
-        body('position').not().isEmpty().withMessage('Enter a valid position'),
-        body('salary').isNumeric().withMessage('Enter a valid salary.'),
-        body('department').not().isEmpty().withMessage('Enter a valid department'),
+        body('first_name').notEmpty().withMessage('Enter a valid first name'),
+        body('last_name').notEmpty().withMessage('Enter a valid last name'),
+        body('email').isEmail().withMessage('Enter a valid email'),
+        body('position').notEmpty().withMessage('Enter a valid position'),
+        body('salary').isNumeric().withMessage('Enter a valid salary'),
+        body('department').notEmpty().withMessage('Enter a valid department'),
     ],
     async (req, res) => {
         // Check for validation errors
@@ -125,39 +126,39 @@ router.post('/api/v1/emp/employees',
 
         const { first_name, last_name, email, position, salary, department } = req.body;
 
-        if (await employeeModel.findOne({ email })){
-            return res.status(400).send({
-                status: false,
-                message: 'Employee already exists.'
-            });
-        }
-
         try {
+            // Check if the employee already exists
+            const existingEmployee = await employeeModel.findOne({ email });
+            if (existingEmployee) {
+                return res.status(400).send({
+                    status: false,
+                    message: 'Employee with this email already exists.',
+                });
+            }
+
             // Create new employee
-            const employee = new employeeModel({
+            const newEmployee = new employeeModel({
                 first_name,
                 last_name,
                 email,
                 position,
                 salary,
-                department
+                department,
             });
-            
-            await employee.save();
 
-            res.status(201).send({
-                message: "Employee created successfully",
-                employee: employee._id
-            });
+            const savedEmployee = await newEmployee.save();
+
+            res.status(201).send(savedEmployee); // Return the full saved employee
         } catch (err) {
-            console.error(`An error occurred: ${err.message}`);
+            console.error(`Error creating employee: ${err.message}`);
             res.status(500).send({
                 status: false,
-                message: "Server error. Please try again later."
+                message: 'Server error. Please try again later.',
             });
         }
     }
 );
+
 
 // Get an employee by ID
 router.get('/api/v1/emp/employees/:eid', async (req, res) => {
