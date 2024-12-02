@@ -21,10 +21,7 @@ export const createUser = (data) => api.post('/user/signup', data);
 export const loginUser = (data) => api.post('/user/login', data);
 
 // API call to update an existing employee
-export const updateDivi =(id, data) => api.put(`/emp/employees/${id}`, data);
+export const updateEmployee =(id, data) => api.put(`/emp/employees/${id}`, data);
 
 // API call to delete existing employee
-export const deleteDivi = (id) => api.delete(`/emp/employees/${id}`);
-
-// API call to search employees by query
-export const searchEmployees = (query) => api.get('/emp/employees/search', { params: { query } });
+export const deleteEmployee = (id) => api.delete(`/emp/employees/${id}`);
